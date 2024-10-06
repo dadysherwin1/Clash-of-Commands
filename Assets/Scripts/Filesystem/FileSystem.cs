@@ -46,7 +46,15 @@ public class FileSystem : MonoBehaviour
             Debug.Log("folder is NULL");
         }
     }
-    
+
+    /// <summary>
+    /// Get the current folder
+    /// </summary>
+    public Folder GetCurrentFolder()
+    {
+        return currentFolder;
+    }
+
     /// <summary>
     /// Returns the current path from the root to the current folder
     /// </summary>
