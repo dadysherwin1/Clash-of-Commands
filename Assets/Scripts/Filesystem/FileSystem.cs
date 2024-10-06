@@ -12,25 +12,6 @@ public class FileSystem : MonoBehaviour
     private void Start()
     {
         SetCurrentFolder(root);
-
-        //Testing (Creating folders)
-        CreateFolder("TestFolder1");
-        Folder folder1 = (Folder)currentFolder.children[0];
-        SetCurrentFolder(folder1);
-        CreateFolder("TestFolder2");
-        Folder folder2 = (Folder)currentFolder.children[0];
-        SetCurrentFolder(folder2);
-        CreateFolder("TestFolder3");
-        Folder folder3 = (Folder)currentFolder.children[0];
-        SetCurrentFolder(folder3);
-        
-        //Testing (Path from root to current folder)
-        Debug.Log(GetCurrentPath());
-
-        //Testing (Deleting folders)
-        SetCurrentFolder(root);
-        DeleteNode(root.children[0]);
-        Debug.Log("After deletion: " + GetCurrentPath());
     }
 
     /// <summary>

@@ -8,7 +8,8 @@ public class CommandManager : MonoBehaviour
     [SerializeField] CD cd;
     [SerializeField] PWD pwd;
     [SerializeField] TOUCH touch;
-
+    [SerializeField] FileSystem fileSystem;
+    [SerializeField] TaskChecker taskChecker;
 
     public void OnCommandEntered(string input)
     {
@@ -34,5 +35,7 @@ public class CommandManager : MonoBehaviour
                 Debug.Log("bash: " + args[0] + ": command not found");
                 break;
         }
+
+        taskChecker.CheckTask(input, fileSystem.GetCurrentPath());
     }
 }

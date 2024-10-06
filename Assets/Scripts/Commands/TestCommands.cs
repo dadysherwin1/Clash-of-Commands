@@ -9,31 +9,30 @@ public class TestCommands : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(LateStart(1));
+        StartCoroutine(RunAllTasks());
     }
 
-    IEnumerator LateStart(float waitTime)
+    // Coroutine to execute commands with a delay between them
+    IEnumerator RunAllTasks()
     {
-        yield return new WaitForSeconds(waitTime);
+        for (int i = 0; i < testCommands.Length; i++)
+        {
+            yield return new WaitForSeconds(1f);
 
-        Debug.Log("dylanka$ fuck");
-        commandManager.OnCommandEntered("fuck");
-        Debug.Log("dylanka$ touch miners");
-        commandManager.OnCommandEntered("touch miners");
-        Debug.Log("dylanka$ ls");
-        commandManager.OnCommandEntered("ls");
-        Debug.Log("dylanka$ cd miners");
-        commandManager.OnCommandEntered("cd miners");
-        Debug.Log("dylanka$ pwd");
-        commandManager.OnCommandEntered("pwd");
-
-        /*Debug.Log("");
-        Debug.Log("");
-        Debug.Log("");
-
-        Debug.Log("dylanka$ cd ..");
-        commandManager.OnCommandEntered("cd ..");
-        Debug.Log("dylanka$ pwd");
-        commandManager.OnCommandEntered("pwd");*/
+            Debug.Log($"dylanka$ {testCommands[i]}");
+            commandManager.OnCommandEntered(testCommands[i]);
+        }
     }
+
+    string[] testCommands = {
+        "pwd",
+        "mkdir miners",
+        "cd miners",
+        "touch file.txt",
+        "echo rush",
+        "ls",
+        "rm file.txt",
+        "cd ..",     // Need to go back to root before deleting the miners folder
+        "rmdir miners"
+    };
 }
