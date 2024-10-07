@@ -37,6 +37,14 @@ public class FileSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// Get the root folder
+    /// </summary>
+    public Folder GetRootFolder()
+    {
+        return root;
+    }
+
+    /// <summary>
     /// Returns the current path from the root to the current folder
     /// </summary>
     public string GetCurrentPath()
