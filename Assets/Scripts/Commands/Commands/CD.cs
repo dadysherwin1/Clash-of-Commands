@@ -18,7 +18,9 @@ public class CD : BaseCommand
 
         if (args.Length <= 1)
             return "";
-        
+        if (args.Length >= 3)
+            return "bash: cd: too many arguments";
+
         string target = args[1];
         Folder folder = fileSystem.GetCurrentFolder();
         if (target.Equals("..")) // go up one directory
@@ -26,6 +28,12 @@ public class CD : BaseCommand
             Folder newFolder = folder.parentFolder;
             fileSystem.SetCurrentFolder(newFolder);
             TerminalUI.SetDirectory(FileSystem.GetCurrentPath());
+            return "";
+        }
+        else if (target.Equals("/"))
+        {
+            Folder newFolder = fileSystem.GetRootFolder();
+            fileSystem.SetCurrentFolder(newFolder);
             return "";
         }
         else // go to child folder
