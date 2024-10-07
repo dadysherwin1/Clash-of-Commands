@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class TaskChecker : MonoBehaviour
 {
     public List<Task> taskList = new List<Task>();
+    public AudioManager audioManager;
     [SerializeField] TMP_Text userPrompt;
 
     private void Start()
@@ -46,6 +47,7 @@ public class TaskChecker : MonoBehaviour
         if (taskList.Count > 0)
         {
             Debug.Log("TASK COMPLETED!");
+            audioManager.PlayCorrect();
 
             if (taskList.Count > 1)
             {

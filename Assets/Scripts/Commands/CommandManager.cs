@@ -14,7 +14,8 @@ public class CommandManager : MonoBehaviour
     private RMDIR rmdir;
     private FileSystem fileSystem;
     private TaskChecker taskChecker;
-    public TerminalUI TerminalUI;
+    public TerminalUI terminalUI;
+    public AudioManager audioManager;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class CommandManager : MonoBehaviour
         rmdir = GetComponent<RMDIR>();
         fileSystem = GameObject.FindObjectOfType<FileSystem>();
         taskChecker = GameObject.FindObjectOfType<TaskChecker>();
-        TerminalUI = GameObject.FindObjectOfType<TerminalUI>();
+        terminalUI = GameObject.FindObjectOfType<TerminalUI>();
     }
 
     public void OnCommandEntered(string input)
@@ -39,32 +40,33 @@ public class CommandManager : MonoBehaviour
         switch (args[0])
         {
             case "ls":
-                TerminalUI.AddResponseLines(ls.OnCommand(args));
+                terminalUI.AddResponseLines(ls.OnCommand(args));
                 break;
             case "cd":
-                TerminalUI.AddResponseLines(cd.OnCommand(args));
+                terminalUI.AddResponseLines(cd.OnCommand(args));
                 break;
             case "pwd":
-                TerminalUI.AddResponseLines(pwd.OnCommand(args));
+                terminalUI.AddResponseLines(pwd.OnCommand(args));
                 break;
             case "touch":
-                TerminalUI.AddResponseLines(touch.OnCommand(args));
+                terminalUI.AddResponseLines(touch.OnCommand(args));
                 break;
             case "echo":
-                TerminalUI.AddResponseLines(echo.OnCommand(args));
+                terminalUI.AddResponseLines(echo.OnCommand(args));
                 break;
             case "rm":
-                TerminalUI.AddResponseLines(rm.OnCommand(args));
+                terminalUI.AddResponseLines(rm.OnCommand(args));
                 break;
             case "mkdir":
-                TerminalUI.AddResponseLines(mkdir.OnCommand(args));
+                terminalUI.AddResponseLines(mkdir.OnCommand(args));
                 break;
             case "rmdir":
-                TerminalUI.AddResponseLines(rmdir.OnCommand(args));
+                terminalUI.AddResponseLines(rmdir.OnCommand(args));
                 break;
             default:
                 // print invalid command entered
-                TerminalUI.AddResponseLines("bash: " + args[0] + ": command not found");
+                terminalUI.AddResponseLines("bash: " + args[0] + ": command not found");
+                //audioManager.PlayError();
                 break;
         }
 
