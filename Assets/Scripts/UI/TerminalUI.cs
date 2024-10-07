@@ -17,6 +17,7 @@ public class TerminalUI : MonoBehaviour
     public GameObject commandLineContainer;
     public string startLocation;
     public string currentLocation;
+    private FileSystem fileSystem;
 
     private CommandManager commandManager;
 
@@ -25,6 +26,7 @@ public class TerminalUI : MonoBehaviour
         commandManager = FindObjectOfType<CommandManager>();
         startLocation = directoryprefab.GetComponentsInChildren<TMP_Text>()[0].text;
         currentLocation = startLocation;
+        fileSystem = FindObjectOfType<FileSystem>();
     }
 
     private void OnGUI()
@@ -49,7 +51,7 @@ public class TerminalUI : MonoBehaviour
         GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
         message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
-        message.GetComponentsInChildren<TMP_Text>()[0].text = currentLocation;
+        message.GetComponentsInChildren<TMP_Text>()[0].text = fileSystem.GetCurrentPath();
     }
 
     // Update is called once per frame
@@ -70,11 +72,4 @@ public class TerminalUI : MonoBehaviour
 
         //}
     }
-
-    public void SetDirectory(string place)
-    {
-        currentLocation = place;
-    }
-    
-
 }

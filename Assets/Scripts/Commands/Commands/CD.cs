@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class CD : BaseCommand
 {
-    public TerminalUI TerminalUI;
-    public FileSystem FileSystem;
-
-    private void Start()
-    {
-        TerminalUI = GameObject.FindObjectOfType<TerminalUI>();
-        FileSystem = GameObject.FindObjectOfType<FileSystem>();
-    }
     public override string OnCommand(string[] args)
     {
         string output = "";
@@ -27,7 +19,6 @@ public class CD : BaseCommand
         {
             Folder newFolder = folder.parentFolder;
             fileSystem.SetCurrentFolder(newFolder);
-            TerminalUI.SetDirectory(FileSystem.GetCurrentPath());
             return "";
         }
         else if (target.Equals("/"))
@@ -46,7 +37,6 @@ public class CD : BaseCommand
                     if (childFolder != null)
                     {
                         fileSystem.SetCurrentFolder(childFolder);
-                        TerminalUI.SetDirectory(FileSystem.GetCurrentPath());
                         return "";
                     }
                     else
