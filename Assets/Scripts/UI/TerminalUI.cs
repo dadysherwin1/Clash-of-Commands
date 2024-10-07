@@ -51,6 +51,8 @@ public class TerminalUI : MonoBehaviour
 
     public void AddResponseLines(string input)
     {
+        if (input.Equals("")) return;
+
         //for (int i = 0; i < inputs.Length; i++)
         //{
             GameObject message = Instantiate(responseprefab, commandLineContainer.transform);
