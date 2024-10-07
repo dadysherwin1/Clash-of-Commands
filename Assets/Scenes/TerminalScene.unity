@@ -1175,6 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a4b9f575bb3b04591846d4ab1bf5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TerminalUI: {fileID: 0}
 --- !u!4 &1823225199
 Transform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class TerminalUI : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class TerminalUI : MonoBehaviour
             string userInput = inputfield.text;
             inputfield.text = "";
             AddDirectoryLine(userInput);
-            OnCommandEntered(userInput);
+            commandManager.OnCommandEntered(userInput);
             userInputLine.transform.SetAsLastSibling();
             inputfield.ActivateInputField();
             inputfield.Select();
@@ -39,7 +40,7 @@ public class TerminalUI : MonoBehaviour
     public void AddDirectoryLine(string userInput)
     {
         Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
-        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 100.0f);
+        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 35.0f);
 
         GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
@@ -48,48 +49,19 @@ public class TerminalUI : MonoBehaviour
 
     // Update is called once per frame
 
-
-    void OnCommandEntered(string entry)
+    public void AddResponseLines(string input)
     {
-        /*entry = entry.ToLower();
-        string[] array = entry.Split(' ');
-        string command = array[0];
-        string action = "";
-        for (int i = 1; i < array.Length; i++)
-        {
-            action += array[i];
-        }
+        //for (int i = 0; i < inputs.Length; i++)
+        //{
+            GameObject message = Instantiate(responseprefab, commandLineContainer.transform);
+            message.transform.SetAsLastSibling();
 
-        if (command == "ls")
-        {
-            //LSCommand.OnCommand(action);
-        }
-        else if (command == "cd")
-        {
-            //CDCommand.OnCommand(action);
-        }
-        else if (command == "touch")
-        {
-            //TOUCHCommand.OnCommand(action);
-        }
-        else if (command == "echo")
-        {
-            //ECHOCommand.OnCommand(action);
-        }
-        else if (command == "rm")
-        {
-            //RMCommand.OnCommand(action);
-        }
-        else if (command == "mkdir")
-        {
-            //MKDIRCommand.OnCommand(action);
-        }
-        else if (command == "rmdir")
-        {
-            //RMDIRCommand.OnCommand(action);
-        }*/
+            Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
+            commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 35.0f);
 
-        commandManager.OnCommandEntered(entry);
+            message.GetComponentInChildren<TMP_Text>().text = input;
+        //}
     }
+    
 
 }

@@ -14,6 +14,7 @@ public class CommandManager : MonoBehaviour
     private RMDIR rmdir;
     private FileSystem fileSystem;
     private TaskChecker taskChecker;
+    public TerminalUI TerminalUI;
 
     private void Start()
     {
@@ -27,6 +28,7 @@ public class CommandManager : MonoBehaviour
         rmdir = GetComponent<RMDIR>();
         fileSystem = GameObject.FindObjectOfType<FileSystem>();
         taskChecker = GameObject.FindObjectOfType<TaskChecker>();
+        TerminalUI = GameObject.FindObjectOfType<TerminalUI>();
     }
 
     public void OnCommandEntered(string input)
@@ -37,28 +39,28 @@ public class CommandManager : MonoBehaviour
         switch (args[0])
         {
             case "ls":
-                Debug.Log(ls.OnCommand(args));
+                TerminalUI.AddResponseLines(ls.OnCommand(args));
                 break;
             case "cd":
-                Debug.Log(cd.OnCommand(args));
+                TerminalUI.AddResponseLines(cd.OnCommand(args));
                 break;
             case "pwd":
-                Debug.Log(pwd.OnCommand(args));
+                TerminalUI.AddResponseLines(pwd.OnCommand(args));
                 break;
             case "touch":
-                Debug.Log(touch.OnCommand(args));
+                TerminalUI.AddResponseLines(touch.OnCommand(args));
                 break;
             case "echo":
-                Debug.Log(echo.OnCommand(args));
+                TerminalUI.AddResponseLines(echo.OnCommand(args));
                 break;
             case "rm":
-                Debug.Log(rm.OnCommand(args));
+                TerminalUI.AddResponseLines(rm.OnCommand(args));
                 break;
             case "mkdir":
-                Debug.Log(mkdir.OnCommand(args));
+                TerminalUI.AddResponseLines(mkdir.OnCommand(args));
                 break;
             case "rmdir":
-                Debug.Log(rmdir.OnCommand(args));
+                TerminalUI.AddResponseLines(rmdir.OnCommand(args));
                 break;
             default:
                 // print invalid command entered
