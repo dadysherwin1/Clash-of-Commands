@@ -8,6 +8,11 @@ public class TOUCH : BaseCommand
     {
         string output = "";
 
+        if (args.Length <= 1)
+        {
+            return "touch: missing operand";
+        }
+
         fileSystem.CreateFile(args[1]);
 
         return output;

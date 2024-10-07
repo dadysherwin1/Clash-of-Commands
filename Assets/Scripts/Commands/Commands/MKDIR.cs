@@ -8,6 +8,10 @@ public class MKDIR : BaseCommand
     {
         string output = "";
 
+        if (args.Length <= 1 ) {
+            return "mkdir: missing operand";
+        }
+
         fileSystem.CreateFolder(args[1]);
 
         return output;

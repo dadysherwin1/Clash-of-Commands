@@ -64,7 +64,7 @@ public class CommandManager : MonoBehaviour
                 break;
             default:
                 // print invalid command entered
-                Debug.Log("bash: " + args[0] + ": command not found");
+                TerminalUI.AddResponseLines("bash: " + args[0] + ": command not found");
                 break;
         }
 
