@@ -1,19 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TerminalUI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TMP_Text Terminal;
-    void Start()
+    public GameObject directoryprefab;
+    public GameObject responseprefab;
+    public TMP_InputField inputfield;
+    public GameObject userInputLine;
+    public ScrollRect scroll;
+    public GameObject commandLineContainer;
+
+   
+
+    private void OnGUI()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return) && inputfield.isFocused && inputfield.text != "")
+        {
+            string userInput = inputfield.text;
+            inputfield.text = "";
+            AddDirectoryLine(userInput);
+            OnCommandEntered(userInput);
+            userInputLine.transform.SetAsLastSibling();
+            inputfield.ActivateInputField();
+            inputfield.Select();
+        }
+    }
+
+    public void AddDirectoryLine(string userInput)
+    {
+        Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
+        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 100.0f);
+
+        GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
+        message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
+        message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
     }
 
     // Update is called once per frame
-    
+
 
     void OnCommandEntered(string entry)
     {
@@ -56,42 +85,4 @@ public class TerminalUI : MonoBehaviour
         }
     }
 
-    void PrintLine(string line)
-    {
-        string print = "/n" + line;
-        Terminal.text += print;
-    }
-
-    void Update()
-    {
-        #region ALPHABET
-        if (Input.GetKeyDown(KeyCode.A)) { Terminal.text += "a"; }
-        else if (Input.GetKeyDown(KeyCode.B)) { Terminal.text += "b"; }
-        else if (Input.GetKeyDown(KeyCode.C)) { Terminal.text += "c"; }
-        else if (Input.GetKeyDown(KeyCode.D)) { Terminal.text += "d"; }
-        else if (Input.GetKeyDown(KeyCode.E)) { Terminal.text += "e"; }
-        else if (Input.GetKeyDown(KeyCode.F)) { Terminal.text += "f"; }
-        else if (Input.GetKeyDown(KeyCode.G)) { Terminal.text += "g"; }
-        else if (Input.GetKeyDown(KeyCode.H)) { Terminal.text += "h"; }
-        else if (Input.GetKeyDown(KeyCode.I)) { Terminal.text += "i"; }
-        else if (Input.GetKeyDown(KeyCode.J)) { Terminal.text += "j"; }
-        else if (Input.GetKeyDown(KeyCode.K)) { Terminal.text += "k"; }
-        else if (Input.GetKeyDown(KeyCode.L)) { Terminal.text += "l"; }
-        else if (Input.GetKeyDown(KeyCode.M)) { Terminal.text += "m"; }
-        else if (Input.GetKeyDown(KeyCode.N)) { Terminal.text += "n"; }
-        else if (Input.GetKeyDown(KeyCode.O)) { Terminal.text += "o"; }
-        else if (Input.GetKeyDown(KeyCode.P)) { Terminal.text += "p"; }
-        else if (Input.GetKeyDown(KeyCode.Q)) { Terminal.text += "q"; }
-        else if (Input.GetKeyDown(KeyCode.R)) { Terminal.text += "r"; }
-        else if (Input.GetKeyDown(KeyCode.S)) { Terminal.text += "s"; }
-        else if (Input.GetKeyDown(KeyCode.T)) { Terminal.text += "t"; }
-        else if (Input.GetKeyDown(KeyCode.U)) { Terminal.text += "u"; }
-        else if (Input.GetKeyDown(KeyCode.V)) { Terminal.text += "v"; }
-        else if (Input.GetKeyDown(KeyCode.W)) { Terminal.text += "w"; }
-        else if (Input.GetKeyDown(KeyCode.X)) { Terminal.text += "x"; }
-        else if (Input.GetKeyDown(KeyCode.Y)) { Terminal.text += "y"; }
-        else if (Input.GetKeyDown(KeyCode.Z)) { Terminal.text += "z"; }
-        else if (Input.GetKeyDown(KeyCode.Space)) { Terminal.text += " "; }
-        #endregion
-    }
 }
