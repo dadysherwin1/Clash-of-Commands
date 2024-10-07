@@ -15,7 +15,12 @@ public class TerminalUI : MonoBehaviour
     public ScrollRect scroll;
     public GameObject commandLineContainer;
 
-   
+    private CommandManager commandManager;
+
+    private void Start()
+    {
+        commandManager = FindObjectOfType<CommandManager>();
+    }
 
     private void OnGUI()
     {
@@ -46,7 +51,7 @@ public class TerminalUI : MonoBehaviour
 
     void OnCommandEntered(string entry)
     {
-        entry = entry.ToLower();
+        /*entry = entry.ToLower();
         string[] array = entry.Split(' ');
         string command = array[0];
         string action = "";
@@ -82,7 +87,9 @@ public class TerminalUI : MonoBehaviour
         else if (command == "rmdir")
         {
             //RMDIRCommand.OnCommand(action);
-        }
+        }*/
+
+        commandManager.OnCommandEntered(entry);
     }
 
 }
