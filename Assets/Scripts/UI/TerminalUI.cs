@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -33,6 +34,8 @@ public class TerminalUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) && inputfield.isFocused && inputfield.text != "")
         {
+            string place = "dylanka@pc " + fileSystem.GetCurrentPath();
+            userInputLine.GetComponentsInChildren<TMP_Text>()[0].text = place;
             string userInput = inputfield.text;
             inputfield.text = "";
             AddDirectoryLine(userInput);
@@ -51,7 +54,8 @@ public class TerminalUI : MonoBehaviour
         GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
         message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
-        message.GetComponentsInChildren<TMP_Text>()[0].text = fileSystem.GetCurrentPath();
+        string place = "dylanka@pc " + fileSystem.GetCurrentPath();
+        message.GetComponentsInChildren<TMP_Text>()[0].text = place;
     }
 
     // Update is called once per frame
