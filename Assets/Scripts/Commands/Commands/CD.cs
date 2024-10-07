@@ -16,6 +16,7 @@ public class CD : BaseCommand
             {
                 Folder newFolder = folder.parentFolder;
                 fileSystem.SetCurrentFolder(newFolder);
+                return "";
             }
             else // go to child folder
             {
@@ -27,13 +28,13 @@ public class CD : BaseCommand
                         if (childFolder != null)
                         {
                             fileSystem.SetCurrentFolder(childFolder);
+                            return "";
                         }
                         else
                         {
                             // THATS A FILE NOT A FOLDER!
                             return "bash: cd: " + target + ": Not a directory";
                         }
-                        break;
                     }
                 }
             }

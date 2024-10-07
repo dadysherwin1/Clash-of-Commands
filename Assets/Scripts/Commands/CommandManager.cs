@@ -4,12 +4,30 @@ using UnityEngine;
 
 public class CommandManager : MonoBehaviour
 {
-    [SerializeField] LS ls;
-    [SerializeField] CD cd;
-    [SerializeField] PWD pwd;
-    [SerializeField] TOUCH touch;
-    [SerializeField] FileSystem fileSystem;
-    [SerializeField] TaskChecker taskChecker;
+    private LS ls;
+    private CD cd;
+    private PWD pwd;
+    private TOUCH touch;
+    private ECHO echo;
+    private RM rm;
+    private MKDIR mkdir;
+    private RMDIR rmdir;
+    private FileSystem fileSystem;
+    private TaskChecker taskChecker;
+
+    private void Start()
+    {
+        ls = GetComponent<LS>();
+        cd = GetComponent<CD>();
+        pwd = GetComponent<PWD>();
+        touch = GetComponent<TOUCH>();
+        echo = GetComponent<ECHO>();
+        rm = GetComponent<RM>();
+        mkdir = GetComponent<MKDIR>();
+        rmdir = GetComponent<RMDIR>();
+        fileSystem = GameObject.FindObjectOfType<FileSystem>();
+        taskChecker = GameObject.FindObjectOfType<TaskChecker>();
+    }
 
     public void OnCommandEntered(string input)
     {
@@ -29,6 +47,18 @@ public class CommandManager : MonoBehaviour
                 break;
             case "touch":
                 Debug.Log(touch.OnCommand(args));
+                break;
+            case "echo":
+                Debug.Log(echo.OnCommand(args));
+                break;
+            case "rm":
+                Debug.Log(rm.OnCommand(args));
+                break;
+            case "mkdir":
+                Debug.Log(mkdir.OnCommand(args));
+                break;
+            case "rmdir":
+                Debug.Log(rmdir.OnCommand(args));
                 break;
             default:
                 // print invalid command entered
