@@ -618,7 +618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -88.064, y: -19.581482}
+  m_AnchoredPosition: {x: -778.8, y: -19.584}
   m_SizeDelta: {x: 176.1276, y: 39.1629}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &379644711
@@ -913,8 +913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -99.51013, y: 120.81421}
-  m_SizeDelta: {x: 213.8391, y: 241.6285}
+  m_AnchoredPosition: {x: -99.51013, y: 134.25235}
+  m_SizeDelta: {x: 213.8391, y: 214.7522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486508347
 MonoBehaviour:
@@ -950,8 +950,6 @@ MonoBehaviour:
     [directory]
 
     mkdir [directory]
-
-    mk [name]
 
     touch [name]
 
@@ -1196,8 +1194,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.7052994, y: -0.0011406}
-  m_SizeDelta: {x: 213.84, y: 241.63}
+  m_AnchoredPosition: {x: 3.7052994, y: 13.438}
+  m_SizeDelta: {x: 213.84, y: 214.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622186033
 MonoBehaviour:
@@ -2570,6 +2568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde30eb1b58368848ad609fe6f1efe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskList: []
   audioManager: {fileID: 691555928}
   userPrompt: {fileID: 154140307}
   scoreDisplay: {fileID: 263725317}
