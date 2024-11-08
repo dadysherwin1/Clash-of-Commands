@@ -15,6 +15,26 @@ public class FileSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// Resets the file system to its default state.
+    /// Clears existing nodes and re-initializes the root and current folder.
+    /// </summary>
+    public void ResetFileSystem(List<String> newFolders, List<String> newFiles)
+    {
+        root = new Folder("root", null);
+        SetCurrentFolder(root);
+        // Add required folder/files or new Task
+        foreach (String folder in newFolders)
+        {
+            CreateFolder(folder);
+        }
+        foreach (String file in newFiles)
+        {
+            CreateFile(file);
+        }
+        AddRandomFilesFolders();
+    }
+
+    /// <summary>
     /// Set the current folder
     /// </summary>
     public void SetCurrentFolder(Folder folder)
@@ -102,6 +122,13 @@ public class FileSystem : MonoBehaviour
         {
             Debug.Log("nodeToDelete is NULL");
         }
+    }
+        
+    public void AddRandomFilesFolders()
+    {
+        WordGenerator generator = new WordGenerator();
+        CreateFolder(generator.GetRandomFolderName());
+        CreateFile(generator.GetRandomFileName()+generator.GetRandomFileExtension());
     }
 
 }
