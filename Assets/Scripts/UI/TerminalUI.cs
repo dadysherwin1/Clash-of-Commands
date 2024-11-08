@@ -21,6 +21,11 @@ public class TerminalUI : MonoBehaviour
     public string currentLocation;
     private FileSystem fileSystem;
     public GameObject cheatSheet;
+
+    public GameObject hard;
+    public GameObject medium;
+    public GameObject easy;
+
     private bool open;
     public List<GameObject> allObjects = new List<GameObject>();
 
@@ -112,5 +117,25 @@ public class TerminalUI : MonoBehaviour
             Destroy(gameObject);
         }
         allObjects.Clear();
+    }
+
+    public void UpdateDifficulty(int difficulty)
+    {
+        hard.SetActive(false);
+        medium.SetActive(false);
+        easy.SetActive(false);
+
+        if (difficulty == 3)
+        {
+            hard.SetActive(true);
+        }
+        else if (difficulty == 2)
+        {
+            medium.SetActive(true);
+        }
+        else if (difficulty == 1)
+        {
+            easy.SetActive(true);
+        }
     }
 }

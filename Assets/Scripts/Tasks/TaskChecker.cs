@@ -100,6 +100,7 @@ public class TaskChecker : MonoBehaviour
     {
         fileSystem.ResetFileSystem(taskList[0].requiredFolders, taskList[0].requiredFiles);
         SetUserPrompt(taskList[0].taskDescription);
+        terminalUI.UpdateDifficulty(taskList[0].pointValue);
     }
 
     void AllTasksCompleted()
