@@ -12,7 +12,11 @@ public class MKDIR : BaseCommand
             return "mkdir: missing operand";
         }
 
-        fileSystem.CreateFolder(args[1]);
+        for (int i = 1; i < args.Length; i++)
+        {
+            string arg = args[i];
+            fileSystem.CreateFolder(arg);
+        }
 
         return output;
     }
