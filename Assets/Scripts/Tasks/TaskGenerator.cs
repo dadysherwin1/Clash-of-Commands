@@ -6,15 +6,21 @@ using UnityEngine;
 
 public class TaskGenerator
 {
-    private List<string> commandTypes;
-    private readonly List<string> allCommands = new List<string>
+    private List<string> easyCommandTypes;
+    private List<string> normalCommandTypes;
+    private readonly List<string> allEasyCommands = new List<string>
     {
         "pwd", "mkdir", "rmdir", "cd", "echo", "ls", "rm", "touch"
+    };
+    private readonly List<string> allNormalCommands = new List<string>
+    {
+        "mkdir", "rmdir", "cd", "echo", "rm", "touch"
     };
 
     public TaskGenerator()
     {
-        ResetCommands();  // Initialize the command list
+        ResetEasyCommands();
+        ResetNormalCommands();
     }
 
     // Generate a list of tasks given a size and return the list
@@ -24,14 +30,14 @@ public class TaskGenerator
         // Generate easy questions
         for (int i = 0; i < listSize / 2; i++)
         {
-            string commandType = GetRandomCommandType();
+            string commandType = GetRandomEasyCommand();
             Task newTask = new Task(commandType, 1);
             taskList.Add(newTask);
         }
         //Generate medium questions
         for (int i = listSize / 2; i < listSize; i++)
         {
-            string commandType = GetRandomCommandType();
+            string commandType = GetRandomNormalCommand();
             Task newTask = new Task(commandType, 2);
             taskList.Add(newTask);
         }
@@ -39,27 +45,48 @@ public class TaskGenerator
     }
 
     // Get a random command type and remove it from the list
-    public string GetRandomCommandType()
+    public string GetRandomEasyCommand()
     {
         // If all commands have been used, reset the command list
-        if (commandTypes.Count == 0)
+        if (easyCommandTypes.Count == 0)
         {
-            ResetCommands();
+            ResetEasyCommands();
         }
 
         // Select a random command and remove it from the list
-        int index = Random.Range(0, commandTypes.Count);
-        string selectedCommand = commandTypes[index];
-        commandTypes.RemoveAt(index);
+        int index = Random.Range(0, easyCommandTypes.Count);
+        string selectedCommand = easyCommandTypes[index];
+        easyCommandTypes.RemoveAt(index);
 
         return selectedCommand;
     }
 
-    // Reset commandTypes list to contain all commands again
-    public void ResetCommands()
+    public string GetRandomNormalCommand()
+    {
+        // If all commands have been used, reset the command list
+        if (normalCommandTypes.Count == 0)
+        {
+            ResetNormalCommands();
+        }
+
+        // Select a random command and remove it from the list
+        int index = Random.Range(0, normalCommandTypes.Count);
+        string selectedCommand = normalCommandTypes[index];
+        normalCommandTypes.RemoveAt(index);
+
+        return selectedCommand;
+    }
+
+    public void ResetEasyCommands()
     {
         // Copy allCommands into commandTypes to reset it
-        commandTypes = new List<string>(allCommands);
+        easyCommandTypes = new List<string>(allEasyCommands);
+    }
+
+    public void ResetNormalCommands()
+    {
+        // Copy allCommands into commandTypes to reset it
+        normalCommandTypes = new List<string>(allNormalCommands);
     }
 
 }
