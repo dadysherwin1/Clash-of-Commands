@@ -11,7 +11,7 @@ public class LS : BaseCommand
         Folder folder = fileSystem.GetCurrentFolder();
         foreach (BaseNode node in folder.children)
         {
-            output += node.name + "\n";
+            output += node.name + ", ";
         }
 
         return output;
