@@ -24,7 +24,14 @@ public struct Task
         workingDirectory = null;
         requiredFiles = new List<string>();
         requiredFolders = new List<string>();
-        GenerateEasyTask(command);
+        switch (value) {
+            case 1:
+                GenerateEasyTask(command);
+                break;
+            case 2:
+                GenerateMediumTask(command);
+                break;
+        }     
     }
 
     /// <summary>
@@ -88,62 +95,54 @@ public struct Task
         }
     }
 
+    //"mkdir", "rmdir", "cd", "rm", "touch"
     public void GenerateMediumTask(string command)
     {
         WordGenerator generator = new WordGenerator();
         string fileName = generator.GetRandomFileName();
-        string folderName = generator.GetRandomFileName();
+        string folderName1 = generator.GetRandomFileName();
+        string folderName2 = generator.GetRandomFileName();
         string fileType = generator.GetRandomFileExtension();
+        string nestedFolderPath = folderName2 + "/" + folderName1;
+
         switch (command)
         {
-            case "pwd":
-                taskDescription = "Find out what our current working directory is.";
-                commandToRun = "pwd";
-                workingDirectory = "";
-                break;
             case "mkdir":
-                taskDescription = "Create a folder called " + folderName + ".";
-                commandToRun = "mkdir " + folderName;
-                workingDirectory = "/root";
+                taskDescription = $"Create a folder called {folderName1} in the {folderName2} folder.";
+                commandToRun = $"mkdir {folderName1}";
+                workingDirectory = "/root/" + folderName2;
+                requiredFolders.Add(folderName2);
                 break;
             case "rmdir":
-                taskDescription = "Delete the " + folderName + " folder.";
-                commandToRun = "rmdir " + folderName;
-                workingDirectory = "/root";
-                requiredFolders.Add(folderName);
+                taskDescription = $"Delete the {folderName1} folder in the {folderName2} folder.";
+                commandToRun = $"rmdir {folderName1}";
+                workingDirectory = "/root/" + folderName2;
+                requiredFolders.Add(nestedFolderPath);
                 break;
             case "cd":
-                taskDescription = "Navigate into the " + folderName + " folder.";
-                commandToRun = "cd " + folderName;
-                workingDirectory = "/root/" + folderName;
-                requiredFolders.Add(folderName);
-                break;
-            case "echo":
-                taskDescription = "Print " + fileName + ".";
-                commandToRun = "echo " + fileName;
-                workingDirectory = "";
-                break;
-            case "ls":
-                taskDescription = "Print the names of each file in the current directory";
-                commandToRun = "ls";
-                workingDirectory = "";
+                taskDescription = $"Find the {folderName1} folder in the {folderName2} folder and navigate into it.";
+                commandToRun = $"cd {folderName1}";
+                workingDirectory = "/root/" + nestedFolderPath;
+                requiredFolders.Add(nestedFolderPath);
                 break;
             case "rm":
-                taskDescription = "Delete the file " + fileName + fileType;
-                commandToRun = "rm " + fileName + fileType;
-                workingDirectory = "/root";
-                requiredFiles.Add(fileName + fileType);
+                taskDescription = $"Delete the file {fileName}{fileType} in the {folderName1} folder.";
+                commandToRun = $"rm {fileName}{fileType}";
+                workingDirectory = "/root/" + folderName1;
+                requiredFiles.Add(folderName1 + "/" + fileName + fileType);
+                requiredFolders.Add(folderName1);
                 break;
             case "touch":
-                taskDescription = "Create a file called " + fileName + fileType;
-                commandToRun = "touch " + fileName + fileType;
-                workingDirectory = "/root";
-                requiredFiles.Add(fileName + fileType);
+                taskDescription = $"Create a file called {fileName}{fileType} in the {folderName1} folder.";
+                commandToRun = $"touch {fileName}{fileType}";
+                workingDirectory = "/root/" + folderName1;
+                requiredFolders.Add(folderName1);
                 break;
             default:
-                taskDescription = "Task Description ERROR";
+                taskDescription = "TASK DESCRIPTION ERROR";
                 break;
         }
     }
+
 
 }

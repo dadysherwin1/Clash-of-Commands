@@ -18,21 +18,84 @@ public class FileSystem : MonoBehaviour
     /// Resets the file system to its default state.
     /// Clears existing nodes and re-initializes the root and current folder.
     /// </summary>
-    public void ResetFileSystem(List<String> newFolders, List<String> newFiles)
+    public void ResetFileSystem(List<string> newFolders, List<string> newFiles)
     {
         root = new Folder("root", null);
         SetCurrentFolder(root);
-        // Add required folder/files or new Task
-        foreach (String folder in newFolders)
+
+        // Create required folder structure
+        foreach (string folderPath in newFolders)
         {
-            CreateFolder(folder);
+            CreateNestedFolderStructure(folderPath);
         }
-        foreach (String file in newFiles)
+
+        // Create required files in their specified folders
+        foreach (string filePath in newFiles)
         {
-            CreateFile(file);
+            string directoryPath = System.IO.Path.GetDirectoryName(filePath);
+            string fileName = System.IO.Path.GetFileName(filePath);
+
+            // Navigate to or create the required directory
+            Folder targetFolder = NavigateOrCreateFolderPath(directoryPath);
+            SetCurrentFolder(targetFolder);
+
+            // Create the file
+            CreateFile(fileName);
+            SetCurrentFolder(root);
         }
+
         AddRandomFilesFolders();
     }
+
+    private void CreateNestedFolderStructure(string folderPath)
+    {
+        // Split the path to create nested folders one by one
+        string[] folderNames = folderPath.Split('/');
+        Folder current = root;
+
+        foreach (string folderName in folderNames)
+        {
+            Folder existingFolder = current.children.Find(f => f is Folder && f.name == folderName) as Folder;
+
+            if (existingFolder == null)
+            {
+                Folder newFolder = new Folder(folderName, current);
+                current.children.Add(newFolder);
+                current = newFolder;
+            }
+            else
+            {
+                current = existingFolder; // Move to the existing folder
+            }
+        }
+    }
+
+    // Helper method to navigate or create the folder structure based on a path
+    private Folder NavigateOrCreateFolderPath(string folderPath)
+    {
+        Folder current = root;
+
+        if (!string.IsNullOrEmpty(folderPath))
+        {
+            string[] folders = folderPath.Split('/');
+
+            foreach (string folderName in folders)
+            {
+                Folder nextFolder = current.children.Find(f => f is Folder && f.name == folderName) as Folder;
+
+                if (nextFolder == null)
+                {
+                    nextFolder = new Folder(folderName, current);
+                    current.children.Add(nextFolder);
+                }
+
+                current = nextFolder;
+            }
+        }
+
+        return current;
+    }
+
 
     /// <summary>
     /// Set the current folder

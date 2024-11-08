@@ -14,7 +14,7 @@ public class TaskGenerator
     };
     private readonly List<string> allNormalCommands = new List<string>
     {
-        "mkdir", "rmdir", "cd", "echo", "rm", "touch"
+        "mkdir", "rmdir", "cd", "rm", "touch"
     };
 
     public TaskGenerator()
