@@ -11,11 +11,11 @@ public class WordGenerator
         "Logs", "Back", "Arch", "Olds", "Mail", "Plan", "Site", "Info", "List", "Save",
         "Proj", "Code", "Move", "Jobs", "Bank", "News", "Scan", "Sync", "Note", "Book",
         "Idea", "Time", "Keep", "Read", "Team", "Copy", "Link", "Meet", "Tech", "User",
-        "Life", "Trips", "Taxe", "Task", "Sent", "Edit", "Docs", "Play", "Help", "Arch",
+        "Life", "Trip", "Taxe", "Task", "Sent", "Edit", "Docs", "Play", "Help", "Arch",
         "Call", "Club", "Plan", "Grab", "Blog", "Drop", "Pubs", "Mode", "Form", "Demo",
         "Core", "Acts", "Walk", "Show", "Shop", "Main", "Cash", "Lead", "Misc", "Tour",
         "Camp", "Game", "Appx", "Quiz", "Food", "Task", "Stat", "Fund", "Port", "Chat",
-        "File", "Task", "Sync", "Tips", "Code", "Hold", "Fun1", "Work", "Logs", "Live",
+        "Food", "Task", "Sync", "Tips", "Code", "Hold", "Fun1", "Work", "Logs", "Live",
         "Meet", "Stat", "Chat", "Edit", "Mock", "Plan", "Temp", "Link", "Data", "Part"
     };
 

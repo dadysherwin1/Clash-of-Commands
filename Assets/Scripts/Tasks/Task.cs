@@ -31,7 +31,7 @@ public struct Task
             case 2:
                 GenerateMediumTask(command);
                 break;
-        }
+        }     
     }
 
     /// <summary>
@@ -95,6 +95,7 @@ public struct Task
         }
     }
 
+    //"mkdir", "rmdir", "cd", "rm", "touch"
     public void GenerateMediumTask(string command)
     {
         WordGenerator generator = new WordGenerator();
@@ -108,35 +109,34 @@ public struct Task
         {
             case "mkdir":
                 taskDescription = $"Create a folder called {folderName1} in the {folderName2} folder.";
-                commandToRun = $"mkdir {nestedFolderPath}";
+                commandToRun = $"mkdir {folderName1}";
                 workingDirectory = "/root/" + folderName2;
-                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
+                requiredFolders.Add(folderName2);
                 break;
             case "rmdir":
-                taskDescription = $"Delete the {folderName1} in the {folderName2} folder.";
-                commandToRun = $"rmdir {nestedFolderPath}";
+                taskDescription = $"Delete the {folderName1} folder in the {folderName2} folder.";
+                commandToRun = $"rmdir {folderName1}";
                 workingDirectory = "/root/" + folderName2;
-                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
+                requiredFolders.Add(nestedFolderPath);
                 break;
             case "cd":
                 taskDescription = $"Find the {folderName1} folder in the {folderName2} folder and navigate into it.";
-                commandToRun = $"cd {nestedFolderPath}";
+                commandToRun = $"cd {folderName1}";
                 workingDirectory = "/root/" + nestedFolderPath;
-                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
+                requiredFolders.Add(nestedFolderPath);
                 break;
             case "rm":
                 taskDescription = $"Delete the file {fileName}{fileType} in the {folderName1} folder.";
                 commandToRun = $"rm {fileName}{fileType}";
-                workingDirectory = "/root/" + nestedFolderPath;
-                requiredFiles.Add(fileName + fileType);
-                requiredFolders.Add(nestedFolderPath);  // Ensure the nested folder path exists
+                workingDirectory = "/root/" + folderName1;
+                requiredFiles.Add(folderName1 + "/" + fileName + fileType);
+                requiredFolders.Add(folderName1);
                 break;
             case "touch":
                 taskDescription = $"Create a file called {fileName}{fileType} in the {folderName1} folder.";
                 commandToRun = $"touch {fileName}{fileType}";
-                workingDirectory = "/root/" + nestedFolderPath;
-                requiredFiles.Add(fileName + fileType);
-                requiredFolders.Add(nestedFolderPath);  // Ensure the nested folder path exists
+                workingDirectory = "/root/" + folderName1;
+                requiredFolders.Add(folderName1);
                 break;
             default:
                 taskDescription = "TASK DESCRIPTION ERROR";

@@ -41,6 +41,7 @@ public class FileSystem : MonoBehaviour
 
             // Create the file
             CreateFile(fileName);
+            SetCurrentFolder(root);
         }
 
         AddRandomFilesFolders();
