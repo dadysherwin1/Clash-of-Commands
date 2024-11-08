@@ -8,7 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class TaskChecker : MonoBehaviour
 {
-    public List<Task> taskList = new List<Task>();
+    private TaskGenerator taskGenerator = new TaskGenerator();
+    private FileSystem fileSystem;
+    public List<Task> taskList;
     public AudioManager audioManager;
     [SerializeField] TMP_Text userPrompt;
     [SerializeField] TMP_Text scoreDisplay;
@@ -20,6 +22,7 @@ public class TaskChecker : MonoBehaviour
 
     private void Start()
     {
+        fileSystem = GameObject.FindObjectOfType<FileSystem>();
         SetupTasks();
     }
 
@@ -36,17 +39,15 @@ public class TaskChecker : MonoBehaviour
 
     void SetupTasks()
     {
-        // Placeholder tasks
-        taskList.Add(new Task("Find out what our current working directory is", "pwd", "/root" ,1));
-        taskList.Add(new Task("Create a folder called clash in root folder", "mkdir clash", "/root", 1));
-        taskList.Add(new Task("Navigate into the clash folder", "cd clash", "/root/clash", 1));
-        taskList.Add(new Task("Create a file called file.txt in the clash folder", "touch file.txt", "/root/clash", 1));
-        taskList.Add(new Task("Print 'rush'", "echo rush", "", 1));
-        taskList.Add(new Task("Print the names of each file in clash folder", "ls", "/root/clash", 1));
-        taskList.Add(new Task("Delete file.txt", "rm file.txt", "/root/clash", 2));
-        taskList.Add(new Task("Delete clash folder", "rmdir clash", "/root", 2));
-        // Setup User prompt
-        SetUserPrompt(taskList[0].taskDescription);
+        taskList = taskGenerator.GenerateTaskList(10);
+
+        if (taskList.Count > 0)
+        {
+            SetupNextTask();
+        } else
+        {
+            Debug.Log("Task List is empty");
+        }
     }
 
     // Check if the current task has been completed succesfully,
@@ -79,7 +80,7 @@ public class TaskChecker : MonoBehaviour
             if (taskList.Count > 1)
             {
                 taskList.RemoveAt(0);
-                SetUserPrompt(taskList[0].taskDescription);
+                SetupNextTask();
                 timeTracked = 0;
             }
             else
@@ -89,6 +90,12 @@ public class TaskChecker : MonoBehaviour
                 Debug.Log("ALL TASKS COMPLETE!");
             }
         }
+    }
+
+    void SetupNextTask()
+    {
+        fileSystem.ResetFileSystem(taskList[0].requiredFolders, taskList[0].requiredFiles);
+        SetUserPrompt(taskList[0].taskDescription);
     }
 
     void AllTasksCompleted()
