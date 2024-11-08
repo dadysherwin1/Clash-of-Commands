@@ -616,10 +616,10 @@ RectTransform:
   m_Father: {fileID: 558517034}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -778.8, y: -19.584}
-  m_SizeDelta: {x: 176.1276, y: 39.1629}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 103.6, y: -19.584}
+  m_SizeDelta: {x: 176.12756, y: 39.1629}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &379644711
 GameObject:
@@ -1159,6 +1159,7 @@ MonoBehaviour:
   startLocation: 
   currentLocation: 
   cheatSheet: {fileID: 732585883}
+  allObjects: []
 --- !u!1 &622186031
 GameObject:
   m_ObjectHideFlags: 0
