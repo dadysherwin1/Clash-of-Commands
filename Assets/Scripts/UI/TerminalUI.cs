@@ -22,6 +22,7 @@ public class TerminalUI : MonoBehaviour
     private FileSystem fileSystem;
     public GameObject cheatSheet;
     private bool open;
+    public List<GameObject> allObjects = new List<GameObject>();
 
     private CommandManager commandManager;
 
@@ -79,6 +80,7 @@ public class TerminalUI : MonoBehaviour
 
         GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
+        allObjects.Add(message);
         message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
         string place = "dylanka@pc " + fileSystem.GetCurrentPath() + " $";
         message.GetComponentsInChildren<TMP_Text>()[0].text = place;
@@ -93,16 +95,22 @@ public class TerminalUI : MonoBehaviour
     {
         if (input.Equals("")) return;
 
-        //for (int i = 0; i < inputs.Length; i++)
-        //{
-            GameObject message = Instantiate(responseprefab, commandLineContainer.transform);
-            message.transform.SetAsLastSibling();
+        GameObject message = Instantiate(responseprefab, commandLineContainer.transform);
+        message.transform.SetAsLastSibling();
+        allObjects.Add(message);
 
-            Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
-            commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 35.0f);
+        Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
+        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 35.0f);
 
-            message.GetComponentInChildren<TMP_Text>().text = input;
+        message.GetComponentInChildren<TMP_Text>().text = input;
+    }
 
-        //}
+    public void ClearScreen()
+    {
+        foreach (GameObject gameObject in allObjects)
+        {
+            Destroy(gameObject);
+        }
+        allObjects.Clear();
     }
 }

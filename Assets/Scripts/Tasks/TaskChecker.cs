@@ -10,6 +10,7 @@ public class TaskChecker : MonoBehaviour
 {
     private TaskGenerator taskGenerator = new TaskGenerator();
     private FileSystem fileSystem;
+    private TerminalUI terminalUI;
     public List<Task> taskList;
     public AudioManager audioManager;
     [SerializeField] TMP_Text userPrompt;
@@ -23,6 +24,7 @@ public class TaskChecker : MonoBehaviour
     private void Start()
     {
         fileSystem = GameObject.FindObjectOfType<FileSystem>();
+        terminalUI = GameObject.FindObjectOfType<TerminalUI>();
         SetupTasks();
     }
 
@@ -69,13 +71,15 @@ public class TaskChecker : MonoBehaviour
                 Debug.Log("TASK COMPLETED!");
                 audioManager.PlayCorrect();
                 CalculateScore();
+                
             }
             else 
             {
                 Debug.Log("TASK FAILED");
                 StartCoroutine(FailedTextEnabled());
             }
-            
+
+            terminalUI.ClearScreen();
 
             if (taskList.Count > 1)
             {
