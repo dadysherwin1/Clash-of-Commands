@@ -102,46 +102,47 @@ public struct Task
         string folderName1 = generator.GetRandomFileName();
         string folderName2 = generator.GetRandomFileName();
         string fileType = generator.GetRandomFileExtension();
+        string nestedFolderPath = folderName2 + "/" + folderName1;
+
         switch (command)
         {
             case "mkdir":
-                taskDescription = "Create a folder called " + folderName1 + " in the " + folderName2 + "folder.";
-                commandToRun = "mkdir " + folderName1;
+                taskDescription = $"Create a folder called {folderName1} in the {folderName2} folder.";
+                commandToRun = $"mkdir {nestedFolderPath}";
                 workingDirectory = "/root/" + folderName2;
+                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
                 break;
             case "rmdir":
-                taskDescription = "Delete the " + folderName1 + " in the " + folderName2 + "folder.";
-                commandToRun = "rmdir " + folderName1;
+                taskDescription = $"Delete the {folderName1} in the {folderName2} folder.";
+                commandToRun = $"rmdir {nestedFolderPath}";
                 workingDirectory = "/root/" + folderName2;
-                requiredFolders.Add(folderName1); //TO DO: add a nested folder
+                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
                 break;
             case "cd":
-                taskDescription = "Find the " + folderName1 + " folder and navigate into it.";
-                commandToRun = "cd " + folderName1;
-                workingDirectory = "/root/" + folderName1;
-                requiredFolders.Add(folderName1); //TO DO: add a nested folder
-                break;
-            case "ls":
-                taskDescription = "Print the names of each file in the current directory";
-                commandToRun = "ls";
-                workingDirectory = "";
+                taskDescription = $"Find the {folderName1} folder in the {folderName2} folder and navigate into it.";
+                commandToRun = $"cd {nestedFolderPath}";
+                workingDirectory = "/root/" + nestedFolderPath;
+                requiredFolders.Add(nestedFolderPath);  // Add nested folder path
                 break;
             case "rm":
-                taskDescription = "Delete the file " + fileName + fileType + "in the " + folderName1 + "folder.";
-                commandToRun = "rm " + fileName + fileType;
-                workingDirectory = "/root/" + folderName1;
-                requiredFiles.Add(fileName + fileType); //TO DO: add a nested folder
+                taskDescription = $"Delete the file {fileName}{fileType} in the {folderName1} folder.";
+                commandToRun = $"rm {fileName}{fileType}";
+                workingDirectory = "/root/" + nestedFolderPath;
+                requiredFiles.Add(fileName + fileType);
+                requiredFolders.Add(nestedFolderPath);  // Ensure the nested folder path exists
                 break;
             case "touch":
-                taskDescription = "Create a file called " + fileName + fileType + "in the " + folderName1 + "folder.";
-                commandToRun = "touch " + fileName + fileType;
-                workingDirectory = "/root/" + folderName1;
-                requiredFiles.Add(fileName + fileType); //TO DO: add a nested folder
+                taskDescription = $"Create a file called {fileName}{fileType} in the {folderName1} folder.";
+                commandToRun = $"touch {fileName}{fileType}";
+                workingDirectory = "/root/" + nestedFolderPath;
+                requiredFiles.Add(fileName + fileType);
+                requiredFolders.Add(nestedFolderPath);  // Ensure the nested folder path exists
                 break;
             default:
                 taskDescription = "TASK DESCRIPTION ERROR";
                 break;
         }
     }
+
 
 }
