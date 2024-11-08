@@ -20,6 +20,8 @@ public class TerminalUI : MonoBehaviour
     public string startLocation;
     public string currentLocation;
     private FileSystem fileSystem;
+    public GameObject cheatSheet;
+    private bool open;
 
     private CommandManager commandManager;
 
@@ -29,6 +31,7 @@ public class TerminalUI : MonoBehaviour
         startLocation = directoryprefab.GetComponentsInChildren<TMP_Text>()[0].text;
         currentLocation = startLocation;
         fileSystem = FindObjectOfType<FileSystem>();
+        open = true;
     }
 
     private void OnGUI()
@@ -43,6 +46,20 @@ public class TerminalUI : MonoBehaviour
             userInputLine.transform.SetAsLastSibling();
             inputfield.ActivateInputField();
             inputfield.Select();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (!open)
+            {
+                cheatSheet.GetComponent<Animator>().Play("Open");
+                open = true;
+            }
+            else
+            {
+                cheatSheet.GetComponent<Animator>().Play("Close");
+                open = false;
+            }
         }
     }
 
