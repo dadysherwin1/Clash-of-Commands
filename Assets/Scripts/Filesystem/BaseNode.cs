@@ -6,6 +6,12 @@ public class BaseNode
 {
     public string name;
     public Folder parentFolder;
+    public bool isHidden
+    {
+        get { return name[0] == '.'; }
+        set { name = "." + name; }
+    }
+
     public void Rename(string newName)
     {
         name = newName;
