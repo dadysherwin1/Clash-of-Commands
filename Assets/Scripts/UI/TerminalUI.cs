@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class TerminalUI : MonoBehaviour
@@ -34,8 +35,7 @@ public class TerminalUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) && inputfield.isFocused && inputfield.text != "")
         {
-            string place = "dylanka@pc " + fileSystem.GetCurrentPath();
-            userInputLine.GetComponentsInChildren<TMP_Text>()[0].text = place;
+            UpdateUserInputLine();
             string userInput = inputfield.text;
             inputfield.text = "";
             AddDirectoryLine(userInput);
@@ -46,6 +46,15 @@ public class TerminalUI : MonoBehaviour
         }
     }
 
+    public void UpdateUserInputLine()
+    {
+        string place = "dylanka@pc " + fileSystem.GetCurrentPath() + " $";
+        userInputLine.GetComponentsInChildren<TMP_Text>()[0].text = place;
+        int characterCount = place.Length;
+        float newWidth = characterCount * 13;
+        userInputLine.GetComponentsInChildren<TMP_Text>()[0].rectTransform.sizeDelta = new Vector2(newWidth, userInputLine.GetComponentsInChildren<TMP_Text>()[0].rectTransform.sizeDelta.y);
+    }
+
     public void AddDirectoryLine(string userInput)
     {
         Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
@@ -54,8 +63,11 @@ public class TerminalUI : MonoBehaviour
         GameObject message = Instantiate(directoryprefab, commandLineContainer.transform);
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
         message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
-        string place = "dylanka@pc " + fileSystem.GetCurrentPath();
+        string place = "dylanka@pc " + fileSystem.GetCurrentPath() + " $";
         message.GetComponentsInChildren<TMP_Text>()[0].text = place;
+        int characterCount = place.Length;
+        float newWidth = characterCount * 13;
+        message.GetComponentsInChildren<TMP_Text>()[0].rectTransform.sizeDelta = new Vector2(newWidth, message.GetComponentsInChildren<TMP_Text>()[0].rectTransform.sizeDelta.y);
     }
 
     // Update is called once per frame

@@ -19,12 +19,14 @@ public class CD : BaseCommand
         {
             Folder newFolder = folder.parentFolder;
             fileSystem.SetCurrentFolder(newFolder);
+            terminalUI.UpdateUserInputLine();
             return "";
         }
         else if (target.Equals("/"))
         {
             Folder newFolder = fileSystem.GetRootFolder();
             fileSystem.SetCurrentFolder(newFolder);
+            terminalUI.UpdateUserInputLine();
             return "";
         }
         else // go to child folder
@@ -37,6 +39,7 @@ public class CD : BaseCommand
                     if (childFolder != null)
                     {
                         fileSystem.SetCurrentFolder(childFolder);
+                        terminalUI.UpdateUserInputLine();
                         return "";
                     }
                     else
