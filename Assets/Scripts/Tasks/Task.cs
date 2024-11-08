@@ -7,7 +7,6 @@ using UnityEngine;
 public struct Task
 {
     public string commandToRun;
-    public string workingDirectory;
     public int pointValue;
     public string taskDescription;
     public string workingDirectory;         // task must be completed in this directory
@@ -20,7 +19,6 @@ public struct Task
     public Task(string command, int value)
     {
         commandToRun = command;
-        workingDirectory = directory;
         pointValue = value;
         taskDescription = null;
         workingDirectory = null;

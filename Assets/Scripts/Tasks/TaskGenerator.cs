@@ -25,14 +25,14 @@ public class TaskGenerator
         for (int i = 0; i < listSize / 2; i++)
         {
             string commandType = GetRandomCommandType();
-            Task newTask = new Task(commandType);
+            Task newTask = new Task(commandType, 1);
             taskList.Add(newTask);
         }
         //Generate medium questions
         for (int i = listSize / 2; i < listSize; i++)
         {
             string commandType = GetRandomCommandType();
-            Task newTask = new Task(commandType);
+            Task newTask = new Task(commandType, 2);
             taskList.Add(newTask);
         }
         return taskList;
