@@ -71,7 +71,7 @@ public class TerminalUI : MonoBehaviour
 
     public void UpdateUserInputLine()
     {
-        string place = "dylanka@pc " + fileSystem.GetCurrentPath() + " $";
+        string place = "player1@pc " + fileSystem.GetCurrentPath() + " $";
         userInputLine.GetComponentsInChildren<TMP_Text>()[0].text = place;
         int characterCount = place.Length;
         float newWidth = characterCount * 13;
@@ -87,7 +87,7 @@ public class TerminalUI : MonoBehaviour
         message.transform.SetSiblingIndex(commandLineContainer.transform.childCount - 1);
         allObjects.Add(message);
         message.GetComponentsInChildren<TMP_Text>()[1].text = userInput;
-        string place = "dylanka@pc " + fileSystem.GetCurrentPath() + " $";
+        string place = "player1@pc " + fileSystem.GetCurrentPath() + " $";
         message.GetComponentsInChildren<TMP_Text>()[0].text = place;
         int characterCount = place.Length;
         float newWidth = characterCount * 13;

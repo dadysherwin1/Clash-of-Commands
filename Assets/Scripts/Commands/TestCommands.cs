@@ -19,7 +19,7 @@ public class TestCommands : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
 
-            Debug.Log("dylanka$ " + testCommands[i]);
+            Debug.Log("player1@pc $ " + testCommands[i]);
             commandManager.OnCommandEntered(testCommands[i]);
         }
     }
