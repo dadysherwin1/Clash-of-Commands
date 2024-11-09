@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BaseCommand : MonoBehaviour
 {
     protected FileSystem fileSystem;
-    public TerminalUI terminalUI;
+    protected TerminalUI terminalUI;
 
     public abstract string OnCommand(string[] args);
 

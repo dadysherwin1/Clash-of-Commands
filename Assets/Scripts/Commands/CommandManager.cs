@@ -12,9 +12,10 @@ public class CommandManager : MonoBehaviour
     private RM rm;
     private MKDIR mkdir;
     private RMDIR rmdir;
+    private CHMOD chmod;
     private FileSystem fileSystem;
     private TaskChecker taskChecker;
-    public TerminalUI terminalUI;
+    private TerminalUI terminalUI;
     public AudioManager audioManager;
 
     private void Start()
@@ -27,6 +28,7 @@ public class CommandManager : MonoBehaviour
         rm = GetComponent<RM>();
         mkdir = GetComponent<MKDIR>();
         rmdir = GetComponent<RMDIR>();
+        chmod = GetComponent<CHMOD>();
         fileSystem = GameObject.FindObjectOfType<FileSystem>();
         taskChecker = GameObject.FindObjectOfType<TaskChecker>();
         terminalUI = GameObject.FindObjectOfType<TerminalUI>();
@@ -62,6 +64,9 @@ public class CommandManager : MonoBehaviour
                 break;
             case "rmdir":
                 terminalUI.AddResponseLines(rmdir.OnCommand(args));
+                break;
+            case "chmod":
+                terminalUI.AddResponseLines(chmod.OnCommand(args));
                 break;
             default:
                 // print invalid command entered

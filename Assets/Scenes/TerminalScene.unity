@@ -2541,6 +2541,7 @@ GameObject:
   - component: {fileID: 1823225192}
   - component: {fileID: 1823225191}
   - component: {fileID: 1823225190}
+  - component: {fileID: 1823225200}
   m_Layer: 0
   m_Name: Commands
   m_TagString: Untagged
@@ -2560,7 +2561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b026f8e2178354bbc376d147197769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2573,7 +2573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980aebcf67114144da7dccc48eaff5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2586,7 +2585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5358e1d7808e7554687b21f716b23fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2599,7 +2597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5cec18ba12eb647870239bbb54272d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2612,7 +2609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f1e533f1e93c444a0c7a4e3bd77a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,7 +2621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6064361186ce4d4f996c6038881fcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2638,7 +2633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7516d7a06488ec44aa1eb7594c2f73f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2651,7 +2645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd532a4781b4272459650814cfbc5311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
 --- !u!114 &1823225198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,7 +2657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a4b9f575bb3b04591846d4ab1bf5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terminalUI: {fileID: 0}
   audioManager: {fileID: 691555928}
 --- !u!4 &1823225199
 Transform:
@@ -2681,6 +2673,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1823225200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823225189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c2da4a2c8cba5e46aaf16c50a9e320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842437108
 GameObject:
   m_ObjectHideFlags: 0

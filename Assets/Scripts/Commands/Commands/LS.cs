@@ -8,27 +8,91 @@ public class LS : BaseCommand
     {
         string output = "";
         bool allFlag = false;
+        bool longFlag = false;
 
-        if (args.Length >= 2)
+        for (int i = 1; i < args.Length; i++)
         {
-            if (args[1] == "-a" || args[1] == "--all")
+            string arg = args[i];
+            if (arg == "-a" || arg == "--all")
             {
                 allFlag = true;
-                output += ". .. ";
+                output += ".  ..  ";
             }
-            else if (args[1] == "-A" || args[1] == "--almost-all")
+            else if (arg == "-A" || arg == "--almost-all")
             {
                 allFlag = true;
+            }
+            else if (arg == "-l")
+            {
+                longFlag = true;
             }
         }
+
 
         Folder folder = fileSystem.GetCurrentFolder();
         foreach (BaseNode node in folder.children)
         {
             if (node.isHidden && !allFlag) continue;
-            output += node.name + " ";
+            Folder isFolder = node as Folder;
+            if (isFolder != null)
+            {
+                // its a folder
+                if (longFlag)
+                {
+                    output += "d";
+                    output += PermissionsToString(node.permissions);
+                    output += " ";
+                    output += "<b>" + node.name + "</b>";
+                    output += "\n";
+                }
+                else
+                {
+                    output += "<b>" + node.name + "</b>";
+                    output += "  ";
+                }
+            }
+            else
+            { 
+                // its a file
+                if (longFlag)
+                {
+                    output += "-";
+                    output += PermissionsToString(node.permissions);
+                    output += " ";
+                    output += node.name;
+                    output += "\n";
+                }
+                else
+                {
+                    output += node.name + "  ";
+                    output += "  ";
+                }
+                
+            }
+           
         }
 
+        return output;
+    }
+
+    string PermissionsToString(bool[] permissions)
+    {
+        string output = "";
+        for (int i = 0; i < 3; i++)
+        {
+            if (permissions[i*3])
+                output += "r";
+            else
+                output += "-";
+            if (permissions[i*3+1])
+                output += "w";
+            else
+                output += "-";
+            if (permissions[i*3+2])
+                output += "x";
+            else
+                output += "-";
+        }
         return output;
     }
 }
