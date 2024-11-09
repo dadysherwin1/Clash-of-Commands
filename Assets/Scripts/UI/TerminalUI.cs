@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -38,6 +39,9 @@ public class TerminalUI : MonoBehaviour
         currentLocation = startLocation;
         fileSystem = FindObjectOfType<FileSystem>();
         open = true;
+        // Set the input field as selected
+        EventSystem.current.SetSelectedGameObject(inputfield.gameObject);
+        inputfield.OnPointerClick(new PointerEventData(EventSystem.current));
     }
 
     private void OnGUI()
