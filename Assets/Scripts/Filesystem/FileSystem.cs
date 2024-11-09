@@ -39,7 +39,7 @@ public class FileSystem : MonoBehaviour
             Folder targetFolder = NavigateOrCreateFolderPath(directoryPath);
             SetCurrentFolder(targetFolder);
 
-            // Create the file
+            // Create the file     
             CreateFile(fileName);
             SetCurrentFolder(root);
         }

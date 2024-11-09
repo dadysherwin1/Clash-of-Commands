@@ -42,7 +42,7 @@ public class TaskChecker : MonoBehaviour
 
     void SetupTasks()
     {
-        taskList = taskGenerator.GenerateTaskList(10);
+        taskList = taskGenerator.GenerateTaskList();
 
         if (taskList.Count > 0)
         {

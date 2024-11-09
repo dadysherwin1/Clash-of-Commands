@@ -31,6 +31,9 @@ public struct Task
             case 2:
                 GenerateMediumTask(command);
                 break;
+            case 3:
+                GenerateHardtask(command);
+                break;
         }     
     }
 
@@ -137,6 +140,47 @@ public struct Task
                 commandToRun = $"touch {fileName}{fileType}";
                 workingDirectory = "/root/" + folderName1;
                 requiredFolders.Add(folderName1);
+                break;
+            default:
+                taskDescription = "TASK DESCRIPTION ERROR";
+                break;
+        }
+    }
+
+    //"rm", "chmod ugo+rwx", "chmod ugo-rwx", "touch"
+    public void GenerateHardtask(string command)
+    {
+        WordGenerator generator = new WordGenerator();
+        string fileName = generator.GetRandomFileName();
+        string folderName1 = generator.GetRandomFileName();
+        string folderName2 = generator.GetRandomFileName();
+        string fileType = generator.GetRandomFileExtension();
+        string nestedFolderPath = folderName2 + "/" + folderName1;
+
+        switch (command)
+        {
+            case "rm":
+                taskDescription = "Delete the hidden file in the current directory,";
+                commandToRun = $"rm .{fileName}{fileType}";
+                workingDirectory = "/root";
+                requiredFiles.Add($".{fileName}{fileType}");
+                break;
+            case "chmod ugo+rwx":
+                taskDescription = $"Allow anyone to read, write, & execute {fileName}{fileType}";
+                commandToRun = $"chmod ugo+rwx {fileName}{fileType}";
+                workingDirectory = "/root";
+                requiredFiles.Add($"{fileName}{fileType}");
+                break;
+            case "chmod ugo-rwx":
+                taskDescription = $"Remove all read, write, & execute permissions for everyone on {fileName}{fileType}";
+                commandToRun = $"chmod ugo-rwx {fileName}{fileType}";
+                workingDirectory = "/root";
+                requiredFiles.Add($"{fileName}{fileType}");
+                break;
+            case "touch":
+                taskDescription = $"Create a hidden file called .{fileName}{fileType} in the current directory";
+                commandToRun = $"touch .{fileName}{fileType}";
+                workingDirectory = "/root";
                 break;
             default:
                 taskDescription = "TASK DESCRIPTION ERROR";
