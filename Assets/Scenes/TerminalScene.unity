@@ -1521,7 +1521,7 @@ MonoBehaviour:
   audioSource: {fileID: 691555926}
   correctSFX: {fileID: 8300000, guid: 8b216df7e4483634f950f2a46ff4c305, type: 3}
   errorSFX: {fileID: 8300000, guid: 9b85f54acfdb0a0478350f43d46f3a93, type: 3}
-  victorySFX: {fileID: 8300000, guid: 7e675430e7b2e614e9eb7420660b552f, type: 3}
+  victorySFX: {fileID: 8300000, guid: bf75a2b1c3cd84fb6809d1dc27990c30, type: 3}
 --- !u!1 &732585883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,7 +2424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6d70311f66bfd9148b035b01cb69b2ed, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0

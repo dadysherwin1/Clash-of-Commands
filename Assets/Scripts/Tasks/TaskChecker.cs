@@ -36,6 +36,7 @@ public class TaskChecker : MonoBehaviour
         if (timeLeft <= 0)
         {
             OnTaskCompleted(false);
+            audioManager.PlayError();
         }
     }
 
