@@ -6,7 +6,6 @@ public class CD : BaseCommand
 {
     public override string OnCommand(string[] args)
     {
-        string output = "";
 
         if (args.Length <= 1)
             return "";

@@ -31,7 +31,6 @@ public class TaskGenerator
     // Generate a list of tasks given a size and return the list
     public List<Task> GenerateTaskList()
     {
-        int listSize = 14;
         List<Task> taskList = new List<Task>();
         // Generate easy questions
         for (int i = 0; i < 5; i++)
