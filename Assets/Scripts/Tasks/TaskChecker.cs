@@ -73,6 +73,9 @@ public class TaskChecker : MonoBehaviour
     {
         if (taskList.Count > 0)
         {
+            terminalUI.ClearScreen();
+            
+
             if (success)
             {
                 Debug.Log("TASK COMPLETED!");
@@ -85,7 +88,7 @@ public class TaskChecker : MonoBehaviour
                 StartCoroutine(FailedTextEnabled());
             }
 
-            terminalUI.ClearScreen();
+            
 
             if (taskList.Count > 1)
             {
@@ -107,6 +110,7 @@ public class TaskChecker : MonoBehaviour
         fileSystem.ResetFileSystem(taskList[0].requiredFolders, taskList[0].requiredFiles);
         SetUserPrompt(taskList[0].taskDescription);
         terminalUI.UpdateDifficulty(taskList[0].pointValue);
+        terminalUI.UpdateUserInputLine();
     }
 
     void AllTasksCompleted()

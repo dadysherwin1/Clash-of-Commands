@@ -1091,8 +1091,7 @@ MonoBehaviour:
 
     touch [name]
 
-    chmod ugo[+/-]rwx
-    [file]'
+    chmod ugo[+/-]rwx [file]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d901601e33092a045996367332a1a9ec, type: 2}
   m_sharedMaterial: {fileID: 7627930263456710005, guid: d901601e33092a045996367332a1a9ec, type: 2}
