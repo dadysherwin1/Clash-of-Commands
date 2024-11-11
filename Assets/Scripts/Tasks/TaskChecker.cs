@@ -17,6 +17,7 @@ public class TaskChecker : MonoBehaviour
     [SerializeField] TMP_Text scoreDisplay;
     [SerializeField] TMP_Text timer;
     [SerializeField] TMP_Text failedText;
+    [SerializeField] TMP_Text newScoreText;
     public int currentScore = 0;
     private float timeTracked = 0;
     private float timeLeft = 0;
@@ -31,14 +32,18 @@ public class TaskChecker : MonoBehaviour
 
     private void Update()
     {
-        timeTracked += Time.deltaTime;
-        timeLeft = Mathf.RoundToInt((taskList[0].pointValue*15) - timeTracked);
-        timer.text = "TIME LEFT: " + timeLeft;
-        if (timeLeft <= 0)
+        if (taskList.Count >= 1)
         {
-            OnTaskCompleted(false);
-            audioManager.PlayError();
+            timeTracked += Time.deltaTime;
+            timeLeft = Mathf.RoundToInt((taskList[0].pointValue*15) - timeTracked);
+            timer.text = "TIME LEFT: " + timeLeft;
+            if (timeLeft <= 0)
+            {
+                OnTaskCompleted(false);
+                audioManager.PlayError();
+            }
         }
+ 
     }
 
     void SetupTasks()
@@ -73,7 +78,6 @@ public class TaskChecker : MonoBehaviour
                 Debug.Log("TASK COMPLETED!");
                 audioManager.PlayCorrect();
                 CalculateScore();
-                
             }
             else 
             {
@@ -117,15 +121,28 @@ public class TaskChecker : MonoBehaviour
 
     void CalculateScore()
     {
-        currentScore += Mathf.RoundToInt(taskList[0].pointValue / (timeTracked * 0.1f));
+        int newScore = Mathf.RoundToInt(taskList[0].pointValue * (1000 / (timeTracked + 1)));
+        currentScore += newScore;
         scoreDisplay.text = "Score: " + currentScore.ToString();
         timeTracked = 0;
+        StartCoroutine(NewScoreEnabled(newScore));
+    }
+
+    private IEnumerator NewScoreEnabled(int newScore)
+    {
+        newScoreText.enabled = true;
+        newScoreText.text = $"+{newScore} score";
+        yield return new WaitForSeconds(2);
+        if (newScoreText)
+        {
+            newScoreText.enabled = false;
+        }
     }
 
     private IEnumerator FailedTextEnabled()
     {
-        failedText.enabled = true; 
-        yield return new WaitForSeconds(2); 
-        failedText.enabled = false; 
+        failedText.enabled = true;
+        yield return new WaitForSeconds(2);
+        failedText.enabled = false;
     }
 }

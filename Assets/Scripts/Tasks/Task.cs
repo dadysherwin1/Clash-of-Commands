@@ -160,7 +160,7 @@ public struct Task
         switch (command)
         {
             case "rm":
-                taskDescription = "Delete the hidden file in the current directory,";
+                taskDescription = "Delete the hidden file in the current directory.";
                 commandToRun = $"rm .{fileName}{fileType}";
                 workingDirectory = "/root";
                 requiredFiles.Add($".{fileName}{fileType}");
@@ -178,7 +178,7 @@ public struct Task
                 requiredFiles.Add($"{fileName}{fileType}");
                 break;
             case "touch":
-                taskDescription = $"Create a hidden file called .{fileName}{fileType} in the current directory";
+                taskDescription = $"Create a hidden file called .{fileName}{fileType} in the current directory.";
                 commandToRun = $"touch .{fileName}{fileType}";
                 workingDirectory = "/root";
                 break;
