@@ -26,6 +26,7 @@ public class TaskGenerator
     {
         ResetEasyCommands();
         ResetNormalCommands();
+        ResetHardCommands();
     }
 
     // Generate a list of tasks given a size and return the list
@@ -92,7 +93,7 @@ public class TaskGenerator
     public string GetRandomHardCommand()
     {
         // If all commands have been used, reset the command list
-        if (normalCommandTypes.Count == 0)
+        if (hardCommandTypes.Count == 0)
         {
             ResetHardCommands();
         }

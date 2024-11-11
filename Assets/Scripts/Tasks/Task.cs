@@ -178,9 +178,10 @@ public struct Task
                 requiredFiles.Add($"{fileName}{fileType}");
                 break;
             case "touch":
-                taskDescription = $"Create a hidden file called .{fileName}{fileType} in the current directory.";
+                taskDescription = $"Create a hidden file called .{fileName}{fileType} in the {folderName1} folder.";
                 commandToRun = $"touch .{fileName}{fileType}";
-                workingDirectory = "/root";
+                workingDirectory = "/root/" + folderName1;
+                requiredFolders.Add(folderName1);
                 break;
             default:
                 taskDescription = "TASK DESCRIPTION ERROR";
