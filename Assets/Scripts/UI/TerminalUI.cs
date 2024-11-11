@@ -27,6 +27,8 @@ public class TerminalUI : MonoBehaviour
     public GameObject medium;
     public GameObject easy;
 
+    private int lines = 1;
+
     private bool open;
     public List<GameObject> allObjects = new List<GameObject>();
 
@@ -42,6 +44,7 @@ public class TerminalUI : MonoBehaviour
         // Set the input field as selected
         EventSystem.current.SetSelectedGameObject(inputfield.gameObject);
         inputfield.OnPointerClick(new PointerEventData(EventSystem.current));
+        lines = 1;
     }
 
     private void OnGUI()
@@ -99,6 +102,10 @@ public class TerminalUI : MonoBehaviour
     }
 
     // Update is called once per frame
+    public void AddLines(int amount)
+    {
+        lines += amount;
+    }
 
     public void AddResponseLines(string input)
     {
@@ -106,12 +113,15 @@ public class TerminalUI : MonoBehaviour
 
         GameObject message = Instantiate(responseprefab, commandLineContainer.transform);
         message.transform.SetAsLastSibling();
+        message.GetComponent<RectTransform>().sizeDelta = new Vector2(message.GetComponent<RectTransform>().sizeDelta.x, 35 * lines);
+        message.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(message.transform.GetChild(0).GetComponent<RectTransform>().sizeDelta.x, 35 * lines);
         allObjects.Add(message);
 
         Vector2 containerSize = commandLineContainer.GetComponent<RectTransform>().sizeDelta;
         commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(containerSize.x, containerSize.y + 35.0f);
 
         message.GetComponentInChildren<TMP_Text>().text = input;
+        lines = 1;
     }
 
     public void ClearScreen()

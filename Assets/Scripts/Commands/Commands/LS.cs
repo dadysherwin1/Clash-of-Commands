@@ -44,6 +44,7 @@ public class LS : BaseCommand
                     output += " ";
                     output += "<b>" + node.name + "</b>";
                     output += "\n";
+                    terminalUI.AddLines(1);
                 }
                 else
                 {
@@ -61,6 +62,7 @@ public class LS : BaseCommand
                     output += " ";
                     output += node.name;
                     output += "\n";
+                    //terminalUI.AddLines(1);
                 }
                 else
                 {
