@@ -26,6 +26,10 @@ public class LS : BaseCommand
             {
                 longFlag = true;
             }
+            else
+            {
+                return "ls: invalid option";
+            }
         }
 
 
