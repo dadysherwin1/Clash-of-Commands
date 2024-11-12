@@ -27,6 +27,7 @@ public class TaskChecker : MonoBehaviour
         fileSystem = GameObject.FindObjectOfType<FileSystem>();
         terminalUI = GameObject.FindObjectOfType<TerminalUI>();
         SetupTasks();
+        Application.runInBackground = true;
         DontDestroyOnLoad(this);
     }
 
