@@ -39,7 +39,7 @@ public class TerminalUI : MonoBehaviour
         startLocation = directoryprefab.GetComponentsInChildren<TMP_Text>()[0].text;
         currentLocation = startLocation;
         fileSystem = FindObjectOfType<FileSystem>();
-        open = true;
+        open = false;
         // Set the input field as selected
         EventSystem.current.SetSelectedGameObject(inputfield.gameObject);
         inputfield.OnPointerClick(new PointerEventData(EventSystem.current));
@@ -60,18 +60,45 @@ public class TerminalUI : MonoBehaviour
             inputfield.Select();
         }
 
+    }
+
+    private void Update()
+    {
+        // Check if the "Tab" key is pressed
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (!open)
-            {
-                cheatSheet.GetComponent<Animator>().Play("Open");
-                open = true;
-            }
-            else
-            {
-                cheatSheet.GetComponent<Animator>().Play("Close");
-                open = false;
-            }
+            ToggleCheatSheet();
+        }
+    }
+
+    //Add the following to index.html of WebGL Build
+    /*
+    <script>
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Tab") {
+              event.preventDefault(); // Prevent the browser's default tab behavior
+              SendMessage('Canvas', 'OnTabPressed');
+        }
+      });
+    </ script >
+    */
+
+    public void OnTabPressed()
+    {
+        ToggleCheatSheet();
+    }
+
+    private void ToggleCheatSheet()
+    {
+        if (!open)
+        {
+            cheatSheet.GetComponent<Animator>().Play("Open");
+            open = true;
+        }
+        else
+        {
+            cheatSheet.GetComponent<Animator>().Play("Close");
+            open = false;
         }
     }
 
