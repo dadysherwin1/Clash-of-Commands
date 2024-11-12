@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VictoryUI : MonoBehaviour
 {
@@ -25,5 +26,10 @@ public class VictoryUI : MonoBehaviour
     void Update()
     {
         
+    }
+    public void RestartGame()
+    {
+        Debug.Log("Loading Main Menu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
